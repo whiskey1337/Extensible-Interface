@@ -9,19 +9,43 @@ using UnityEngine;
 public class Menu : MonoBehaviour
 {
     [Header("Elements")]
-    public Ring data;
-    public MenuElement menuElementPrefab;
+    [SerializeField] public Ring data;
+    [SerializeField] private MenuElement menuElementPrefab;
     protected MenuElement[] menuElements;
     protected Menu parent;
 
     [Header("Settings")]
-    public float GapWidthDegree = 1f;
-    public string path;
+    [SerializeField] private float GapWidthDegree = 1f;
+    //public string path;
 
     [Header("Events")]
-    public Action<string> callback;
+    private Action<string> callback;
 
-    private void Start()
+    private void Awake()
+    {
+        CreateMenu();
+    }
+
+    private void Update()
+    {
+        var stepLength = 360f / data.elements.Length;
+        var mouseAngle = NormalizedAngle(Vector3.SignedAngle(Vector3.up, Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2), Vector3.forward) + stepLength / 2f);
+        var activeElement = (int)(mouseAngle / stepLength);
+
+        for (int i = 0; i < data.elements.Length; i++) 
+        {
+            if (i == activeElement)
+            {
+                menuElements[i].menuElement.color = new Color(1f, 1f, 1f, 0.75f);
+            }
+            else
+            {
+                menuElements[i].menuElement.color = new Color(1f, 1f, 1f, 0.5f);
+            }
+        }
+    }
+
+    private void CreateMenu()
     {
         var stepLength = 360f / data.elements.Length;
         var iconDistance = Vector3.Distance(menuElementPrefab.icon.transform.position, menuElementPrefab.menuElement.transform.position);
@@ -45,26 +69,6 @@ public class Menu : MonoBehaviour
             //»конка сектора
             menuElements[i].icon.transform.localPosition = menuElements[i].menuElement.transform.localPosition + Quaternion.AngleAxis(i * stepLength, Vector3.forward) * Vector3.up * iconDistance;
             menuElements[i].icon.sprite = data.elements[i].Icon;
-        }
-    }
-
-    private void Update()
-    {
-        var stepLength = 360f / data.elements.Length;
-        var mouseAngle = NormalizedAngle(Vector3.SignedAngle(Vector3.up, Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2), Vector3.forward) + stepLength / 2f);
-        var activeElement = (int)(mouseAngle / stepLength);
-        
-
-        for (int i = 0; i < data.elements.Length; i++) 
-        {
-            if (i == activeElement)
-            {
-                menuElements[i].menuElement.color = new Color(1f, 1f, 1f, 0.75f);
-            }
-            else
-            {
-                menuElements[i].menuElement.color = new Color(1f, 1f, 1f, 0.5f);
-            }
         }
     }
 

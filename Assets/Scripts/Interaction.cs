@@ -19,13 +19,11 @@ public class Interaction : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
+    private void OnMouseEnter()
     {
         menuCG.alpha = 1;
         menuCG.interactable = true;
         menuCG.blocksRaycasts = true;
         isOpened = true;
     }
-
-
 }
