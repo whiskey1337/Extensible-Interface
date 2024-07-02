@@ -243,6 +243,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9103844450583464605, guid: df6d26c4ebb82df4a995ba5b8c9a5aef,
         type: 3}
+      propertyPath: menuCG
+      value: 
+      objectReference: {fileID: 715447996}
+    - target: {fileID: 9103844450583464605, guid: df6d26c4ebb82df4a995ba5b8c9a5aef,
+        type: 3}
       propertyPath: GapWidthDegree
       value: 1
       objectReference: {fileID: 0}
@@ -374,7 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f431ba40b837b4c9a64f5a59596b93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuCG: {fileID: 715447996}
+  isEntered: 0
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
