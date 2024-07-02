@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Runtime.CompilerServices;
+using UnityEditor;
 using UnityEngine;
 
 public class Menu : MonoBehaviour
@@ -15,11 +16,11 @@ public class Menu : MonoBehaviour
     protected Menu parent;
 
     [Header("Settings")]
-    [SerializeField] private float GapWidthDegree = 1f;
-    //public string path;
-
-    [Header("Events")]
-    private Action<string> callback;
+    [SerializeField] private float gapWidthDegree = 1f;
+    [SerializeField] private CanvasGroup menuCG;
+    [SerializeField] private Interaction interactionObject; // ?
+    private bool isOpened = false;
+    private int activeElement;
 
     private void Awake()
     {
@@ -28,11 +29,52 @@ public class Menu : MonoBehaviour
 
     private void Update()
     {
+        if (interactionObject.isEntered)
+        {
+            ShowMenu();
+        }
+
+        if (isOpened && Input.GetKeyDown(KeyCode.Escape))
+        {
+            HideMenu();
+        }
+
+        SelectMenuOption();
+
+        if (Input.GetMouseButtonDown(0) && isOpened)
+        {
+            interactionObject.PositionCallback(activeElement, CallbackOnOptionClicked);
+        }
+    }
+
+    private void HideMenu()
+    {
+        isOpened = false;
+        menuCG.alpha = 0;
+        menuCG.interactable = false;
+        menuCG.blocksRaycasts = false;
+    }
+
+    private void ShowMenu()
+    {
+        isOpened = true;
+        menuCG.alpha = 1;
+        menuCG.interactable = true;
+        menuCG.blocksRaycasts = true;
+    }
+
+    static void CallbackOnOptionClicked(string message)
+    {
+        Debug.Log("Object attached to the " + message + " position");
+    }
+
+    private void SelectMenuOption()
+    {
         var stepLength = 360f / data.elements.Length;
         var mouseAngle = NormalizedAngle(Vector3.SignedAngle(Vector3.up, Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2), Vector3.forward) + stepLength / 2f);
-        var activeElement = (int)(mouseAngle / stepLength);
+        activeElement = (int)(mouseAngle / stepLength);
 
-        for (int i = 0; i < data.elements.Length; i++) 
+        for (int i = 0; i < data.elements.Length; i++)
         {
             if (i == activeElement)
             {
@@ -61,9 +103,9 @@ public class Menu : MonoBehaviour
             menuElements[i].transform.localRotation = Quaternion.identity;
 
             //Секторы
-            menuElements[i].menuElement.fillAmount = 1f / data.elements.Length - GapWidthDegree / 360f;
+            menuElements[i].menuElement.fillAmount = 1f / data.elements.Length - gapWidthDegree / 360f;
             menuElements[i].menuElement.transform.localPosition = Vector3.zero;
-            menuElements[i].menuElement.transform.localRotation = Quaternion.Euler(0, 0, stepLength / 2f + GapWidthDegree / 2f + i * stepLength);
+            menuElements[i].menuElement.transform.localRotation = Quaternion.Euler(0, 0, stepLength / 2f + gapWidthDegree / 2f + i * stepLength);
             menuElements[i].menuElement.color = new Color(1f, 1f, 1f, 0.5f);
 
             //Иконка сектора
