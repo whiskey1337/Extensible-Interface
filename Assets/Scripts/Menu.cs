@@ -34,8 +34,9 @@ public class Menu : MonoBehaviour
             ShowMenu();
         }
 
-        if (isOpened && Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetMouseButtonDown(1) && isOpened)
         {
+            interactionObject.isEntered = false;
             HideMenu();
         }
 
@@ -44,46 +45,7 @@ public class Menu : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && isOpened)
         {
             interactionObject.PositionCallback(activeElement, CallbackOnOptionClicked);
-        }
-    }
-
-    private void HideMenu()
-    {
-        isOpened = false;
-        menuCG.alpha = 0;
-        menuCG.interactable = false;
-        menuCG.blocksRaycasts = false;
-    }
-
-    private void ShowMenu()
-    {
-        isOpened = true;
-        menuCG.alpha = 1;
-        menuCG.interactable = true;
-        menuCG.blocksRaycasts = true;
-    }
-
-    static void CallbackOnOptionClicked(string message)
-    {
-        Debug.Log("Object attached to the " + message + " position");
-    }
-
-    private void SelectMenuOption()
-    {
-        var stepLength = 360f / data.elements.Length;
-        var mouseAngle = NormalizedAngle(Vector3.SignedAngle(Vector3.up, Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2), Vector3.forward) + stepLength / 2f);
-        activeElement = (int)(mouseAngle / stepLength);
-
-        for (int i = 0; i < data.elements.Length; i++)
-        {
-            if (i == activeElement)
-            {
-                menuElements[i].menuElement.color = new Color(1f, 1f, 1f, 0.75f);
-            }
-            else
-            {
-                menuElements[i].menuElement.color = new Color(1f, 1f, 1f, 0.5f);
-            }
+            HideMenu();
         }
     }
 
@@ -114,5 +76,45 @@ public class Menu : MonoBehaviour
         }
     }
 
+    private void SelectMenuOption()
+    {
+        var stepLength = 360f / data.elements.Length;
+        var mouseAngle = NormalizedAngle(Vector3.SignedAngle(Vector3.up, Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2), Vector3.forward) + stepLength / 2f);
+        activeElement = (int)(mouseAngle / stepLength);
+
+        for (int i = 0; i < data.elements.Length; i++)
+        {
+            if (i == activeElement)
+            {
+                menuElements[i].menuElement.color = new Color(1f, 1f, 1f, 0.75f);
+            }
+            else
+            {
+                menuElements[i].menuElement.color = new Color(1f, 1f, 1f, 0.5f);
+            }
+        }
+    }
+
     private float NormalizedAngle(float a) => (a + 360f) % 360f;
+
+    static void CallbackOnOptionClicked(string message)
+    {
+        Debug.Log("Object attached to the " + message + " position");
+    }
+
+    private void HideMenu()
+    {
+        isOpened = false;
+        menuCG.alpha = 0;
+        menuCG.interactable = false;
+        menuCG.blocksRaycasts = false;
+    }
+
+    private void ShowMenu()
+    {
+        isOpened = true;
+        menuCG.alpha = 1;
+        menuCG.interactable = true;
+        menuCG.blocksRaycasts = true;
+    }
 }
