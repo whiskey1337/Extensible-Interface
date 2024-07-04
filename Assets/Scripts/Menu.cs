@@ -45,6 +45,7 @@ public class Menu : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && isOpened)
         {
             interactionObject.PositionCallback(activeElement, CallbackOnOptionClicked);
+            interactionObject.isEntered = false;
             HideMenu();
         }
     }

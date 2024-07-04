@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7377975018383341899}
   - component: {fileID: 9103844450583464605}
+  - component: {fileID: -3750984002564205705}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -51,5 +52,18 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 534e95e5fdb39b04c9ba3069f49d9775, type: 2}
   menuElementPrefab: {fileID: 8064412753363224756, guid: 9c61b7ed71eefe54cbe230945f280925,
     type: 3}
-  GapWidthDegree: 1
-  path: 
+  gapWidthDegree: 1
+  menuCG: {fileID: -3750984002564205705}
+  interactionObject: {fileID: 0}
+--- !u!225 &-3750984002564205705
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4171594523450116477}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
