@@ -10,15 +10,15 @@ using UnityEngine;
 public class Menu : MonoBehaviour
 {
     [Header("Elements")]
-    [SerializeField] public Ring data;
+    [SerializeField] private Ring data;
     [SerializeField] private MenuElement menuElementPrefab;
+    [SerializeField] private CanvasGroup menuCG;
+    [SerializeField] private Interaction interactionObject; // ?
     protected MenuElement[] menuElements;
-    protected Menu parent;
 
     [Header("Settings")]
     [SerializeField] private float gapWidthDegree = 1f;
-    [SerializeField] private CanvasGroup menuCG;
-    [SerializeField] private Interaction interactionObject; // ?
+
     private bool isOpened = false;
     private int activeElement;
 
