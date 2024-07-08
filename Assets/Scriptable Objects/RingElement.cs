@@ -7,4 +7,6 @@ public class RingElement : ScriptableObject
 {
     public string Name;
     public Sprite Icon;
+    public string Header;
+    public string Content;
 }

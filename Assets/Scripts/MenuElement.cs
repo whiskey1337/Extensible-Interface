@@ -7,4 +7,6 @@ public class MenuElement : MonoBehaviour
 {
     public Image icon;
     public Image menuElement;
+    public string header;
+    public string content;
 }

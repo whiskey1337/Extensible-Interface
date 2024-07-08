@@ -6,8 +6,9 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Menu : MonoBehaviour
+public class Menu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Elements")]
     [SerializeField] private Ring data;
@@ -21,6 +22,8 @@ public class Menu : MonoBehaviour
 
     private bool isOpened = false;
     private int activeElement;
+    public string content;
+    public string header;
 
     private void Awake()
     {
@@ -74,6 +77,8 @@ public class Menu : MonoBehaviour
             //»конка сектора
             menuElements[i].icon.transform.localPosition = menuElements[i].menuElement.transform.localPosition + Quaternion.AngleAxis(i * stepLength, Vector3.forward) * Vector3.up * iconDistance;
             menuElements[i].icon.sprite = data.elements[i].Icon;
+            menuElements[i].header = data.elements[i].Header;
+            menuElements[i].content = data.elements[i].Content;
         }
     }
 
@@ -88,6 +93,8 @@ public class Menu : MonoBehaviour
             if (i == activeElement)
             {
                 menuElements[i].menuElement.color = new Color(1f, 1f, 1f, 0.75f);
+                content = menuElements[i].content;
+                header = menuElements[i].header;
             }
             else
             {
@@ -117,5 +124,15 @@ public class Menu : MonoBehaviour
         menuCG.alpha = 1;
         menuCG.interactable = true;
         menuCG.blocksRaycasts = true;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        TooltipManager.ShowTooltip(content, header);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        TooltipManager.HideTooltip();
     }
 }

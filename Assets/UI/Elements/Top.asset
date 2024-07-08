@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Top side
   Icon: {fileID: 21300000, guid: 78db39d2c27667b45b4b97ee3a5c7680, type: 3}
+  Header: TOP SIDE
+  Content: Object will be attached to the TOP of the cube
