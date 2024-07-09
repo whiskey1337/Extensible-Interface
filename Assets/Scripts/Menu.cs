@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Menu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Menu : MonoBehaviour  /*, IPointerEnterHandler, IPointerExitHandler */
 {
     [Header("Elements")]
     [SerializeField] private Ring data;
@@ -37,6 +37,15 @@ public class Menu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             ShowMenu();
         }
 
+        if (isOpened)
+        {
+            TooltipManager.ShowTooltip(content, header);
+        }
+        else
+        {
+            TooltipManager.HideTooltip();
+        }
+
         if (Input.GetMouseButtonDown(1) && isOpened)
         {
             interactionObject.isEntered = false;
@@ -45,7 +54,7 @@ public class Menu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         SelectMenuOption();
 
-        if (Input.GetMouseButtonDown(0) && isOpened)
+        if (Input.GetMouseButtonUp(0) && isOpened)
         {
             interactionObject.PositionCallback(activeElement, CallbackOnOptionClicked);
             interactionObject.isEntered = false;
@@ -95,6 +104,7 @@ public class Menu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 menuElements[i].menuElement.color = new Color(1f, 1f, 1f, 0.75f);
                 content = menuElements[i].content;
                 header = menuElements[i].header;
+                
             }
             else
             {
@@ -126,7 +136,7 @@ public class Menu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         menuCG.blocksRaycasts = true;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    /* public void OnPointerEnter(PointerEventData eventData)
     {
         TooltipManager.ShowTooltip(content, header);
     }
@@ -134,5 +144,5 @@ public class Menu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerExit(PointerEventData eventData)
     {
         TooltipManager.HideTooltip();
-    }
+    } */
 }
