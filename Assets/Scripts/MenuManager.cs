@@ -7,9 +7,19 @@ public class MenuManager : MonoBehaviour
 {
     public static MenuManager instance;
 
+    [SerializeField] private CanvasGroup menuCG;
     public Menu menu;
     public bool isOpened = false;
-    [SerializeField] private CanvasGroup menuCG;
+    public int activeElement;
+    public string content;
+    public string header;
+
+    private void Update()
+    {
+        content = menu.content;
+        header = menu.header;
+        activeElement = menu.activeElement;
+    }
 
     private void Awake()
     {
@@ -26,16 +36,16 @@ public class MenuManager : MonoBehaviour
     public void ShowMenu()
     {
         isOpened = true;
-        menuCG.alpha = 0;
-        menuCG.interactable = false;
-        menuCG.blocksRaycasts = false;
+        menuCG.alpha = 1;
+        menuCG.interactable = true;
+        menuCG.blocksRaycasts = true;
     }
 
     public void HideMenu()
     {
         isOpened = false;
-        menuCG.alpha = 1;
-        menuCG.interactable = true;
-        menuCG.blocksRaycasts = true;
+        menuCG.alpha = 0;
+        menuCG.interactable = false;
+        menuCG.blocksRaycasts = false;
     }
 }

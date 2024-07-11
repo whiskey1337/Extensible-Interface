@@ -7,21 +7,22 @@ using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SocialPlatforms.GameCenter;
 
 public class Menu : MonoBehaviour  /*, IPointerEnterHandler, IPointerExitHandler */
 {
     [Header("Elements")]
     [SerializeField] private Ring data;
     [SerializeField] private MenuElement menuElementPrefab;
-    [SerializeField] private CanvasGroup menuCG;
-    [SerializeField] private Interaction interactionObject; // ?
+    //[SerializeField] private CanvasGroup menuCG;
+    //[SerializeField] private Interaction interactionObject; // ?
     protected MenuElement[] menuElements;
 
     [Header("Settings")]
     [SerializeField] private float gapWidthDegree = 1f;
 
-    private bool isOpened = false;
-    private int activeElement;
+    //private bool isOpened = false;
+    public int activeElement;
     public string content;
     public string header;
 
@@ -32,7 +33,7 @@ public class Menu : MonoBehaviour  /*, IPointerEnterHandler, IPointerExitHandler
 
     private void Update()
     {
-        if (interactionObject.isEntered)
+        /* if (interactionObject.isEntered)
         {
             ShowMenu();
         }
@@ -44,22 +45,23 @@ public class Menu : MonoBehaviour  /*, IPointerEnterHandler, IPointerExitHandler
         else
         {
             TooltipManager.HideTooltip();
-        }
+        } */
 
-        if (Input.GetMouseButtonDown(1) && isOpened)
+        /* if (Input.GetMouseButtonDown(1) && isOpened)
         {
             interactionObject.isEntered = false;
             HideMenu();
-        }
+        } */
 
         SelectMenuOption();
 
-        if (Input.GetMouseButtonUp(0) && isOpened)
+        /* if (Input.GetMouseButtonUp(0) && isOpened)
         {
             interactionObject.PositionCallback(activeElement, CallbackOnOptionClicked);
             interactionObject.isEntered = false;
             HideMenu();
-        }
+        } */
+        
     }
 
     private void CreateMenu()
@@ -115,12 +117,12 @@ public class Menu : MonoBehaviour  /*, IPointerEnterHandler, IPointerExitHandler
 
     private float NormalizedAngle(float a) => (a + 360f) % 360f;
 
-    static void CallbackOnOptionClicked(string message)
+    /* static void CallbackOnOptionClicked(string message)
     {
         Debug.Log("Object attached to the " + message + " position");
-    }
+    } */
 
-    private void HideMenu()
+    /* private void HideMenu()
     {
         isOpened = false;
         menuCG.alpha = 0;
@@ -134,7 +136,7 @@ public class Menu : MonoBehaviour  /*, IPointerEnterHandler, IPointerExitHandler
         menuCG.alpha = 1;
         menuCG.interactable = true;
         menuCG.blocksRaycasts = true;
-    }
+    } */
 
     /* public void OnPointerEnter(PointerEventData eventData)
     {

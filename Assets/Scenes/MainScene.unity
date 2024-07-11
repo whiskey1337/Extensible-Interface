@@ -414,9 +414,10 @@ GameObject:
   - component: {fileID: 243334358}
   - component: {fileID: 243334357}
   - component: {fileID: 243334361}
+  - component: {fileID: 243334362}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -517,6 +518,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96f431ba40b837b4c9a64f5a59596b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &243334362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243334356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89d9c1cbb20902345a6ab53937b26259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isEntered: 0
@@ -988,9 +1001,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ce4c0784f3ff34eb009c65015670e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuCG: {fileID: 881349714}
   menu: {fileID: 1872378294}
   isOpened: 0
-  menuCG: {fileID: 881349714}
+  activeElement: 0
+  content: 
+  header: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

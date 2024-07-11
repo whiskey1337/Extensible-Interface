@@ -9,14 +9,14 @@ using UnityEditor;
 public class Interaction : MonoBehaviour
 {
     private string[] positions = new string[] { "FRONT", "TOP", "RIGHT" };
-    public bool isEntered = false;
+    //public bool isEntered = false;
 
     public void PositionCallback(int index, Action<string> callback)
     {
         callback?.Invoke(positions[index]);
     }
 
-    private void OnMouseEnter()
+    /* private void OnMouseEnter()
     {
         if (Input.GetMouseButton(0))
         {
@@ -27,5 +27,5 @@ public class Interaction : MonoBehaviour
     private void OnMouseExit()
     {
         isEntered = false;
-    }
+    } */
 }
