@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SocialPlatforms.GameCenter;
 
 public class Menu : MonoBehaviour  /*, IPointerEnterHandler, IPointerExitHandler */
 {
@@ -83,7 +82,7 @@ public class Menu : MonoBehaviour  /*, IPointerEnterHandler, IPointerExitHandler
             menuElements[i].menuElement.fillAmount = 1f / data.elements.Length - gapWidthDegree / 360f;
             menuElements[i].menuElement.transform.localPosition = Vector3.zero;
             menuElements[i].menuElement.transform.localRotation = Quaternion.Euler(0, 0, stepLength / 2f + gapWidthDegree / 2f + i * stepLength);
-            menuElements[i].menuElement.color = new Color(1f, 1f, 1f, 0.5f);
+            menuElements[i].menuElement.color = new Color(1f, 1f, 1f, 0.65f);
 
             //»конка сектора
             menuElements[i].icon.transform.localPosition = menuElements[i].menuElement.transform.localPosition + Quaternion.AngleAxis(i * stepLength, Vector3.forward) * Vector3.up * iconDistance;
@@ -103,14 +102,14 @@ public class Menu : MonoBehaviour  /*, IPointerEnterHandler, IPointerExitHandler
         {
             if (i == activeElement)
             {
-                menuElements[i].menuElement.color = new Color(1f, 1f, 1f, 0.75f);
+                menuElements[i].menuElement.color = new Color(1f, 1f, 1f, 0.8f);
                 content = menuElements[i].content;
                 header = menuElements[i].header;
                 
             }
             else
             {
-                menuElements[i].menuElement.color = new Color(1f, 1f, 1f, 0.5f);
+                menuElements[i].menuElement.color = new Color(1f, 1f, 1f, 0.65f);
             }
         }
     }
