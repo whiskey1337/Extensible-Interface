@@ -11,11 +11,11 @@ public class Tooltip : MonoBehaviour
     public TextMeshProUGUI contentField;
     public LayoutElement layoutElement;
     public int characterWrapLimit;
-    public RectTransform rectTransform;
+    //public RectTransform rectTransform;
 
     private void Awake()
     {
-        rectTransform = GetComponent<RectTransform>();
+        //rectTransform = GetComponent<RectTransform>();
     }
 
     public void SetText(string content, string header = "")
@@ -43,13 +43,13 @@ public class Tooltip : MonoBehaviour
             layoutElement.enabled = (headerLength > characterWrapLimit || contentLength > characterWrapLimit) ? true : false;
         }
 
-        Vector2 position = Input.mousePosition;
+        /* Vector2 position = Input.mousePosition;
 
         float pivotX = position.x / Screen.width;
         float pivotY = position.y / Screen.height / 10;
 
         rectTransform.pivot = new Vector2(pivotX, pivotY);
-        transform.position = position;
+        transform.position = position; */
 
     }
 }
