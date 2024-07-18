@@ -9,80 +9,57 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Menu : MonoBehaviour  /*, IPointerEnterHandler, IPointerExitHandler */
+public class Menu : MonoBehaviour
 {
     [Header("Elements")]
     [SerializeField] private Ring data;
     [SerializeField] private MenuElement menuElementPrefab;
-    //[SerializeField] private CanvasGroup menuCG;
-    //[SerializeField] private Interaction interactionObject; // ?
-    protected MenuElement[] menuElements;
 
     [Header("Settings")]
     [SerializeField] private float gapWidthDegree = 1f;
     [SerializeField] [Range (0, 2)] private float scale = 1f;
-    [SerializeField][Range(-1000, 1000)] private float moveX = 0f;
-    [SerializeField][Range(-1000, 1000)] private float moveY = 0f;
+    [SerializeField] [Range(-980, 980)] private float moveX = 0f;
+    [SerializeField] [Range(-540, 540)] private float moveY = 0f;
 
-    //private bool isOpened = false;
-    public int activeElement;
-    public string content;
-    public string header;
+    protected MenuElement[] menuElements;
+
+    private int activeElement;
+    private string content;
+    private string header;
+
     private float currentX;
     private float currentY;
     private Vector3 initialPosition;
 
     private void Awake()
     {
-        CreateMenu();
         currentX = moveX;
         currentY = moveY;
         initialPosition = transform.localPosition;
+
+        MenuScaleControl();
+        MenuChangePositionX();
+        MenuChangePositionY();
+
+        CreateMenu();
     }
 
     private void Update()
     {
-        /* if (interactionObject.isEntered)
-        {
-            ShowMenu();
-        }
-
-        if (isOpened)
-        {
-            TooltipManager.ShowTooltip(content, header);
-        }
-        else
-        {
-            TooltipManager.HideTooltip();
-        } */
-
-        /* if (Input.GetMouseButtonDown(1) && isOpened)
-        {
-            interactionObject.isEntered = false;
-            HideMenu();
-        } */
         if (moveX != currentX)
         {
-            MenuTransformPositionX();
+            MenuChangePositionX();
             currentX = moveX;
         }
 
         if (moveY != currentY)
         {
-            MenuTransformPositionY();
+            MenuChangePositionY();
             currentY = moveY;
         }
 
         MenuScaleControl();
         SelectMenuOption();
-
-        /* if (Input.GetMouseButtonUp(0) && isOpened)
-        {
-            interactionObject.PositionCallback(activeElement, CallbackOnOptionClicked);
-            interactionObject.isEntered = false;
-            HideMenu();
-        } */
-        
     }
 
     private void CreateMenu()
@@ -144,7 +121,7 @@ public class Menu : MonoBehaviour  /*, IPointerEnterHandler, IPointerExitHandler
         transform.localScale = Vector2.one * scale;
     }
 
-    private void MenuTransformPositionX()
+    private void MenuChangePositionX()
     {
         Vector3 positionMoveX = new Vector3(moveX, currentY, 0);
 
@@ -152,7 +129,7 @@ public class Menu : MonoBehaviour  /*, IPointerEnterHandler, IPointerExitHandler
         return;
     }
 
-    private void MenuTransformPositionY()
+    private void MenuChangePositionY()
     {
         Vector3 positionMoveY = new Vector3(currentX, moveY, 0);
 
@@ -160,34 +137,18 @@ public class Menu : MonoBehaviour  /*, IPointerEnterHandler, IPointerExitHandler
         return;
     }
 
-    /* static void CallbackOnOptionClicked(string message)
+    public string GetContent()
     {
-        Debug.Log("Object attached to the " + message + " position");
-    } */
-
-    /* private void HideMenu()
-    {
-        isOpened = false;
-        menuCG.alpha = 0;
-        menuCG.interactable = false;
-        menuCG.blocksRaycasts = false;
+        return content;
     }
 
-    private void ShowMenu()
+    public string GetHeader()
     {
-        isOpened = true;
-        menuCG.alpha = 1;
-        menuCG.interactable = true;
-        menuCG.blocksRaycasts = true;
-    } */
-
-    /* public void OnPointerEnter(PointerEventData eventData)
-    {
-        TooltipManager.ShowTooltip(content, header);
+        return header;
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public int GetActiveElement()
     {
-        TooltipManager.HideTooltip();
-    } */
+        return activeElement;
+    }
 }

@@ -9,56 +9,51 @@ public class MenuTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private GameObject go;
     private Interaction interactionObject;
     private ObjectTrigger objectTrigger;
-    private static string output;
-    //private TextMeshProUGUI outputText; //temp demo
 
     private void Awake()
     {
         go = GameObject.FindGameObjectWithTag("Object");
         interactionObject = go.GetComponent<Interaction>();
         objectTrigger = go.GetComponent<ObjectTrigger>();
-        //outputText = FindFirstObjectByType<TextMeshProUGUI>(); //temp demo
     }
 
     private void Update()
     {
-        if (MenuManager.instance.isOpened)
+        if (MenuManager.instance.IsOpened())
         {
-            TooltipManager.ShowTooltip(MenuManager.instance.content, MenuManager.instance.header);
+            TooltipManager.ShowTooltip(MenuManager.instance.GetContent(), MenuManager.instance.GetHeader());
         }
         else
         {
             TooltipManager.HideTooltip();
         }
 
-        if (!MenuManager.instance.isOpened)
+        if (!MenuManager.instance.IsOpened())
         {
-            objectTrigger.isEntered = false;
+            objectTrigger.Entered(false);
             MenuManager.instance.HideMenu();
         }
 
-        if (Input.GetMouseButtonUp(0) && MenuManager.instance.isOpened)
+        if (Input.GetMouseButtonUp(0) && MenuManager.instance.IsOpened())
         {
-            interactionObject.PositionCallback(MenuManager.instance.activeElement, CallbackOnOptionClicked);
-            objectTrigger.isEntered = false;
+            interactionObject.PositionCallback(MenuManager.instance.GetActiveElement(), CallbackOnOptionClicked);
+            objectTrigger.Entered(false);
             MenuManager.instance.HideMenu();
+            TooltipManager.HideTooltip();
         }
-
-        //outputText.text = output;
     }
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnPointerEnter(PointerEventData eventData) 
     {
-
+        MenuManager.instance.Opened(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        MenuManager.instance.isOpened = false;
+        MenuManager.instance.Opened(false);
     }
 
     static void CallbackOnOptionClicked(string message)
     {
         Debug.Log("Object attached to the " + message + " position");
-        //output = $"Object attached to the {message} position";
     }
 }

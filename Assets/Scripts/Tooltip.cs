@@ -7,10 +7,13 @@ using UnityEngine.UI;
 [ExecuteInEditMode()]
 public class Tooltip : MonoBehaviour
 {
-    public TextMeshProUGUI headerField;
-    public TextMeshProUGUI contentField;
-    public LayoutElement layoutElement;
-    public int characterWrapLimit;
+    [Header("Elements")]
+    [SerializeField] private TextMeshProUGUI headerField;
+    [SerializeField] private TextMeshProUGUI contentField;
+    [SerializeField] private LayoutElement layoutElement;
+
+    [Header("Settings")]
+    [SerializeField] private int characterWrapLimit;
     //public RectTransform rectTransform;
 
     private void Awake()

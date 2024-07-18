@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectTrigger : MonoBehaviour
 {
-    public bool isEntered = false;
+    private bool isEntered = false;
 
     private void Update()
     {
@@ -25,5 +25,10 @@ public class ObjectTrigger : MonoBehaviour
     private void OnMouseExit()
     {
         isEntered = false;
+    }
+
+    public void Entered(bool value)
+    {
+        isEntered = value;
     }
 }
