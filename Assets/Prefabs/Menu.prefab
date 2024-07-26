@@ -48,13 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573da7b4284f04c4b8e9b540d703ece3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 534e95e5fdb39b04c9ba3069f49d9775, type: 2}
+  data: {fileID: 0}
   menuElementPrefab: {fileID: 8064412753363224756, guid: 9c61b7ed71eefe54cbe230945f280925,
     type: 3}
   gapWidthDegree: 1
   scale: 1
   moveX: 0
   moveY: 0
-  activeElement: 0
-  content: 
-  header: 
